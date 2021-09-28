@@ -305,7 +305,7 @@ let touchCounterX = 0
 let touchCounterY = 0
 
 function handleStart(evt) {
-    evt.preventDefault();
+    //evt.preventDefault();
     var touches = evt.changedTouches;
 
     for (var i = 0; i < touches.length; i++) {
@@ -317,7 +317,7 @@ function handleStart(evt) {
 
 
 function handleMove(evt) {
-    evt.preventDefault();
+    //evt.preventDefault();
     var touches = evt.changedTouches;
 
     for (var i = 0; i < touches.length; i++) {
@@ -358,7 +358,7 @@ function handleMove(evt) {
 }
 
 function handleEnd(evt) {
-    evt.preventDefault();
+    //evt.preventDefault();
     var touches = evt.changedTouches;
 
     for (var i = 0; i < touches.length; i++) {
