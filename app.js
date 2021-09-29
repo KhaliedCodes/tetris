@@ -313,13 +313,14 @@ function handleStart(evt) {
         prevPageY = touches[i].pageY
         ongoingTouches.push(copyTouch(touches[i]));
     }
+
 }
 
 
 function handleMove(evt) {
     //evt.preventDefault();
     var touches = evt.changedTouches;
-
+    //console.log(goingDown)
     for (var i = 0; i < touches.length; i++) {
         var idx = ongoingTouchIndexById(touches[i].identifier);
 
@@ -327,23 +328,27 @@ function handleMove(evt) {
             //console.log(ongoingTouches)
             //TODO INSERT MOVE
 
-            console.log(ongoingTouches[idx].pageX, prevPageX + 30)
-            if (touchCounterX > 50 && rightWall() && rightSide()) {
+            //console.log(ongoingTouches[idx].pageX, prevPageX + 30)
+            console.log(ongoingTouches[idx].pageY, prevPageY)
+            if (touchCounterX > 75 && rightWall() && rightSide()) {
                 shape.moveRight()
                 clone.moveRight()
                 ghost()
                 touchCounterX = 0
+                touchCounterY = 0
 
-            } else if (touchCounterX < -50 && leftWall() && leftSide()) {
+            } else if (touchCounterX < -75 && leftWall() && leftSide()) {
                 shape.moveLeft()
                 clone.moveLeft()
 
                 ghost()
                 touchCounterX = 0
+                touchCounterY = 0
             }
-            if (touchCounterY > 50 && !land() && !grounded()) {
+            if (touchCounterY > 25 && !land() && !grounded()) {
                 shape.moveDown()
                 touchCounterY = 0
+                touchCounterX = 0
             }
             touchCounterX += ongoingTouches[idx].pageX - prevPageX
             touchCounterY += ongoingTouches[idx].pageY - prevPageY
@@ -365,7 +370,7 @@ function handleEnd(evt) {
         var idx = ongoingTouchIndexById(touches[i].identifier);
 
         if (idx >= 0) {
-
+            //console.log(goingDown)
             if (ongoingTouches[idx].pageX == prevPageX && ongoingTouches[idx].pageY == prevPageY) {
                 if (ongoingTouches[idx].pageX > shape.x) {
                     shape.rotateRight()
