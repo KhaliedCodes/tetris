@@ -328,20 +328,20 @@ function handleMove(evt) {
             //TODO INSERT MOVE
 
             console.log(ongoingTouches[idx].pageX, prevPageX + 30)
-            if (touchCounterX > 100 && rightWall() && rightSide()) {
+            if (touchCounterX > 50 && rightWall() && rightSide()) {
                 shape.moveRight()
                 clone.moveRight()
                 ghost()
                 touchCounterX = 0
 
-            } else if (touchCounterX < -100 && leftWall() && leftSide()) {
+            } else if (touchCounterX < -50 && leftWall() && leftSide()) {
                 shape.moveLeft()
                 clone.moveLeft()
 
                 ghost()
                 touchCounterX = 0
             }
-            if (touchCounterY > 100 && !land() && !grounded()) {
+            if (touchCounterY > 50 && !land() && !grounded()) {
                 shape.moveDown()
                 touchCounterY = 0
             }
@@ -365,7 +365,28 @@ function handleEnd(evt) {
         var idx = ongoingTouchIndexById(touches[i].identifier);
 
         if (idx >= 0) {
-            //TOTO INSERT MOVE
+
+            if (ongoingTouches[idx].pageX == prevPageX && ongoingTouches[idx].pageY == prevPageY) {
+                if (ongoingTouches[idx].pageX > shape.x) {
+                    shape.rotateRight()
+                    clone.rotateRight()
+                    outsideLeftWall()
+                    outsideRightWall()
+                    leftSide()
+                    rightSide()
+                    ghost()
+                } else if (ongoingTouches[idx].pageX < shape.x) {
+                    shape.rotateLeft()
+                    clone.rotateLeft()
+                    outsideLeftWall()
+                    outsideRightWall()
+                    leftSide()
+                    rightSide()
+                    ghost()
+                }
+            }
+
+
             ongoingTouches.splice(idx, 1); // remove it; we're done
         } else {
             console.log("can't figure out which touch to end");
