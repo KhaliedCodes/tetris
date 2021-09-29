@@ -373,6 +373,10 @@ function handleEnd(evt) {
     }
 }
 
+function toggleZoomScreen() {
+    document.body.style.zoom = "80%";
+}
+toggleZoomScreen()
 
 
 document.addEventListener("touchstart", handleStart, false);
